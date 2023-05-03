@@ -1,4 +1,5 @@
-# LibraryProject -- what went wrong
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-05-03T22:33:47.927+07:00 ERROR 9556 --- [  restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
 
 ***************************
 APPLICATION FAILED TO START
