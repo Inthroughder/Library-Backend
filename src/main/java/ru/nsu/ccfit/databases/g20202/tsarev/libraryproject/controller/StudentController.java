@@ -14,7 +14,7 @@ public class StudentController {
 
     @PostMapping
     public StudentDTO saveStudent(@RequestBody StudentDTO studentDTO){
-        return databaseService.save(studentDTO);
+        return databaseService.saveStudent(studentDTO);
     }
 
 }
