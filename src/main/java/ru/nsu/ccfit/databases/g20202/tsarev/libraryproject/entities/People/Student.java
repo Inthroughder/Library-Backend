@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.People;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -9,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @RequiredArgsConstructor
+@PrimaryKeyJoinColumn(name="id")
 public class Student extends Reader {
 
     private String group;
