@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.People;
+package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.people;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -13,6 +13,6 @@ import lombok.experimental.SuperBuilder;
 @PrimaryKeyJoinColumn(name="id")
 public class Student extends Reader {
 
-    private String group;
+    private String groupNumber;
 
 }

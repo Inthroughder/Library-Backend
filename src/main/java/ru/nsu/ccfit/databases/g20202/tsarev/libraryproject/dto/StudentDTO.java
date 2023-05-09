@@ -1,10 +1,10 @@
-package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.DTO;
-
+package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.People.Student;
+import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.Category;
+import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.people.Student;
 
 import java.sql.Date;
 
@@ -22,43 +22,39 @@ public class StudentDTO {
     protected Date ticketValidUntil;
     protected Date punishedUntil;
     protected Long punishAmount;
-    protected Date left;
-    protected Date joined;
-    private String group;
+    protected Date dateLeft;
+    protected Date dateJoined;
+    private String groupNumber;
 
     public static StudentDTO fromEntity(Student student){ //static to call in DatabaseService
 
         return StudentDTO.builder()
                 .id(student.getId())
-                .group(student.getGroup())
+                .groupNumber(student.getGroupNumber())
                 .fullName(student.getFullName())
-                .categoryId(student.getCategoryId())
+                .categoryId(student.getCategoryId().getId())
                 .department(student.getDepartment())
                 .faculty(student.getFaculty())
-                .ticketId(student.getTicketId())
-                .ticketValidUntil(student.getTicketValidUntil())
                 .punishedUntil(student.getPunishedUntil())
                 .punishAmount(student.getPunishAmount())
-                .left(student.getLeft())
-                .joined(student.getJoined())
+                .dateLeft(student.getDateLeft())
+                .dateJoined(student.getDateJoined())
                 .build();
 
     }
 
-    public static Student toEntity(StudentDTO studentDTO){
+    public static Student toEntity(StudentDTO studentDTO, Category category){
         return Student.builder()
                 .id(studentDTO.getId())
-                .group(studentDTO.getGroup())
+                .groupNumber(studentDTO.getGroupNumber())
                 .fullName(studentDTO.getFullName())
-                .categoryId(studentDTO.getCategoryId())
+                .categoryId(category)
                 .department(studentDTO.getDepartment())
                 .faculty(studentDTO.getFaculty())
-                .ticketId(studentDTO.getTicketId())
-                .ticketValidUntil(studentDTO.getTicketValidUntil())
                 .punishedUntil(studentDTO.getPunishedUntil())
                 .punishAmount(studentDTO.getPunishAmount())
-                .left(studentDTO.getLeft())
-                .joined(studentDTO.getJoined())
+                .dateLeft(studentDTO.getDateLeft())
+                .dateJoined(studentDTO.getDateJoined())
                 .build();
     }
 

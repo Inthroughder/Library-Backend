@@ -9,14 +9,12 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @RequiredArgsConstructor
-public class Category {
+public class Genre {
 
     @jakarta.persistence.Id //field is an ID
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto-increment
     private Long id;
 
-    private String categoryName;
-
-    private Boolean allowTakingBooks;
+    private String name;
 
 }

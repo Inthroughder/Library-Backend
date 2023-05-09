@@ -1,11 +1,11 @@
-package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.People;
+package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.people;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.Id;
+import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.Category;
 
 import java.sql.Date;
 
@@ -22,22 +22,20 @@ public class Reader {
 
     protected String fullName;
 
-    protected Long categoryId;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    protected Category categoryId;
 
     protected String department;
 
     protected String faculty;
 
-    protected Long ticketId;
-
-    protected Date ticketValidUntil;
-
     protected Date punishedUntil;
 
     protected Long punishAmount;
 
-    protected Date left;
+    protected Date dateLeft;
 
-    protected Date joined;
+    protected Date dateJoined;
 
 }
