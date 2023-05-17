@@ -25,7 +25,7 @@ public class Book {
 
     private Long price;
 
-    private Long bookplaceId;
+    private Long bookPlaceId;
 
     @Enumerated
     private BookStatus status;

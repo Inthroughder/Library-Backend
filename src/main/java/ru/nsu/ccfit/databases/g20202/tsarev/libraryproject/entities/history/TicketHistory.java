@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.history;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import java.sql.Date;
 @Entity
 @Data
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Builder
 public class TicketHistory {
 

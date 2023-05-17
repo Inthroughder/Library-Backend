@@ -7,8 +7,11 @@ import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.TeacherDTO;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.people.Teacher;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.service.ReaderService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/reader")
+//@CrossOrigin(origins = "*")
 public class ReaderController {
 
     @Autowired
@@ -17,6 +20,11 @@ public class ReaderController {
     @GetMapping("/student/{id}")
     public StudentDTO getStudentById(@PathVariable Long id){
         return readerService.getStudentById(id);
+    }
+
+    @GetMapping("/student")
+    public List<StudentDTO> getAllStudents(){
+        return readerService.getAllStudents();
     }
 
     @PostMapping("/student")
