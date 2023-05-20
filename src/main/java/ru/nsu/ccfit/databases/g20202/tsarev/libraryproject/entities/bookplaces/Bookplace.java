@@ -1,9 +1,6 @@
 package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.bookplaces;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

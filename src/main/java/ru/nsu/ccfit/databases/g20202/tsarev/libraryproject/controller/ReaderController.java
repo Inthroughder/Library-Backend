@@ -23,8 +23,8 @@ public class ReaderController {
     }
 
     @GetMapping("/student")
-    public List<StudentDTO> getAllStudents(){
-        return readerService.getAllStudents();
+    public List<StudentDTO> getAllStudents(@RequestParam String bookplace){
+        return readerService.getAllStudents(bookplace);
     }
 
     @PostMapping("/student")
@@ -41,5 +41,7 @@ public class ReaderController {
     public TeacherDTO saveTeacher(@RequestBody TeacherDTO teacherDTO){
         return readerService.saveTeacher(teacherDTO);
     }
+
+
 
 }

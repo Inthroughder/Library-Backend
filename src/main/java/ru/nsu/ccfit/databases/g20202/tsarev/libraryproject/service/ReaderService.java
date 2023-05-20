@@ -37,6 +37,9 @@ public class ReaderService {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private BookPlaceRepository bookPlaceRepository;
+
     public StudentDTO saveStudent(StudentDTO studentDTO){
         Category category = categoryRepository.getReferenceById(studentDTO.getCategoryId());
         Student entity = StudentDTO.toEntity(studentDTO, category);
@@ -55,7 +58,9 @@ public class ReaderService {
         }
     }
 
-    public List<StudentDTO> getAllStudents(){
+    @Transactional(readOnly = true)
+    public List<StudentDTO> getAllStudents(String bookplace){
+        Long bookplaceId = bookPlaceRepository.findByName(bookplace);
         List<Student> students = studentRepository.findAll();
         return students.stream().map(student -> StudentDTO.fromEntity(student)).collect(Collectors.toList());
     }
