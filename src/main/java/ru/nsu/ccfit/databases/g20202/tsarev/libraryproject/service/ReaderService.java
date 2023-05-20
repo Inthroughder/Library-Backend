@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.StudentDTO;
@@ -15,11 +16,11 @@ import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.repository.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.repository.StudentSpecifications.hasBookPlaces;
+import static ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.repository.StudentSpecifications.hasFaculty;
 
 @Service
 public class ReaderService {
@@ -43,7 +44,7 @@ public class ReaderService {
     private BookPlaceRepository bookPlaceRepository;
 
     public StudentDTO saveStudent(StudentDTO studentDTO){
-        Category category = categoryRepository.getReferenceById(studentDTO.getCategoryId());
+        Category category = categoryRepository.getByCategoryName(studentDTO.getCategory());
         Student entity = StudentDTO.toEntity(studentDTO, category);
         Student student = studentRepository.save(entity);
         return StudentDTO.fromEntity(student);
@@ -60,7 +61,7 @@ public class ReaderService {
         }
     }
 
-    @Transactional(readOnly = true)
+    /*@Transactional(readOnly = true)
     public List<StudentDTO> getAllStudents(String bookPlace){
 
         List<Student> students;
@@ -73,11 +74,42 @@ public class ReaderService {
         }
 
         return students.stream().map(student -> StudentDTO.fromEntity(student)).collect(Collectors.toList());
+    }*/
+
+    @Transactional(readOnly = true)
+    public List<StudentDTO> getAllStudents(Map<String, String> params){
+        List<Specification<Student>> predicates = new ArrayList<>();
+
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            switch (entry.getKey()) {
+                case "bookPlace" -> {
+                    List<Long> bookPlaceIds = bookPlaceRepository.findByName(entry.getValue());
+                    predicates.add(hasBookPlaces(bookPlaceIds));
+                }
+                case "faculty" -> {
+                    predicates.add(hasFaculty(entry.getValue()));
+                }
+            }
+        }
+
+        Specification<Student> result = Specification.allOf(predicates);
+        List<Student> students = studentRepository.findAll(result);
+
+//        List<Student> students;
+//
+//        if (Objects.nonNull(bookPlace)){
+//            List<Long> bookPlaceIds = bookPlaceRepository.findByName(bookPlace);
+//            students = studentRepository.findAllByBookPlace(bookPlaceIds);
+//        } else {
+//            students = studentRepository.findAll();
+//        }
+
+        return students.stream().map(student -> StudentDTO.fromEntity(student)).collect(Collectors.toList());
     }
 
     @Transactional
     public TeacherDTO saveTeacher(TeacherDTO teacherDTO){
-        Category category = categoryRepository.getReferenceById(teacherDTO.getCategoryId());
+        Category category = categoryRepository.getByCategoryName(teacherDTO.getCategory());
         Teacher entity = TeacherDTO.toEntity(teacherDTO, category);
         Teacher teacher = teacherRepository.save(entity);
         //TODO сохранить тикет в истории, в тикете сохранить ссылку на ридера

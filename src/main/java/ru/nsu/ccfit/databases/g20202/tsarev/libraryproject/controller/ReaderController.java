@@ -4,27 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.StudentDTO;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.TeacherDTO;
-import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.people.Teacher;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.service.ReaderService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/reader")
-//@CrossOrigin(origins = "*")
 public class ReaderController {
 
     @Autowired
     ReaderService readerService;
 
-    @GetMapping("/student/{id}")
-    public StudentDTO getStudentById(@PathVariable Long id){
-        return readerService.getStudentById(id);
-    }
-
     @GetMapping("/student")
-    public List<StudentDTO> getAllStudents(@RequestParam(required = false) String bookPlace){
-        return readerService.getAllStudents(bookPlace);
+    public List<StudentDTO> getAllStudents(@RequestParam(required = false) Map<String, String> params){
+        return readerService.getAllStudents(params);
     }
 
     @PostMapping("/student")
@@ -32,16 +26,9 @@ public class ReaderController {
         return readerService.saveStudent(studentDTO);
     }
 
-    @GetMapping("/teacher/{id}")
-    public TeacherDTO getTeacherById(@PathVariable Long id){
-        return readerService.getTeacherById(id);
-    }
-
     @PostMapping("/teacher")
     public TeacherDTO saveTeacher(@RequestBody TeacherDTO teacherDTO){
         return readerService.saveTeacher(teacherDTO);
     }
-
-
 
 }

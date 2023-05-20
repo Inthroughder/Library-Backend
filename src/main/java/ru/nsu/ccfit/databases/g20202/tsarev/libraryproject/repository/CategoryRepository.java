@@ -6,4 +6,7 @@ import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
+
+    public Category getByCategoryName(String categoryName);
+
 }

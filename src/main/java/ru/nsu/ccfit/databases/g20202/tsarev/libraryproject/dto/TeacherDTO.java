@@ -15,7 +15,7 @@ public class TeacherDTO {
 
     private Long id;
     protected String fullName;
-    protected Long categoryId;
+    protected String category;
     protected String department;
     protected String faculty;
     protected Long ticketId;
@@ -32,7 +32,7 @@ public class TeacherDTO {
                 .id(teacher.getId())
                 .chair(teacher.getChair())
                 .fullName(teacher.getFullName())
-                .categoryId(teacher.getCategoryId().getId())
+                .category(teacher.getCategoryId().getCategoryName())
                 .department(teacher.getDepartment())
                 .faculty(teacher.getFaculty())
                 .punishedUntil(teacher.getPunishedUntil())
