@@ -3,7 +3,7 @@ package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.bookplaces.Bookplace;
+import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.bookplaces.BookPlace;
 
 @Entity
 @Data
@@ -19,8 +19,8 @@ public class BookLimit {
     private Genre genreId;
 
     @ManyToOne
-    @JoinColumn(name = "bookplaceId")
-    private Bookplace bookplaceId;
+    @JoinColumn(name = "bookPlaceId")
+    private BookPlace bookPlaceId;
 
     private Long count;
 

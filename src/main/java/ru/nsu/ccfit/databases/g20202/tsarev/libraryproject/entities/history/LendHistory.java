@@ -19,11 +19,11 @@ public class LendHistory {
 
     @ManyToOne
     @JoinColumn(name = "readerId")
-    private Reader readerId;
+    private Reader reader;
 
     @ManyToOne
     @JoinColumn(name = "bookId")
-    private Book bookId;
+    private Book book;
 
     private Date takenDate;
 

@@ -15,7 +15,9 @@ import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.repository.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -59,9 +61,17 @@ public class ReaderService {
     }
 
     @Transactional(readOnly = true)
-    public List<StudentDTO> getAllStudents(String bookplace){
-        Long bookplaceId = bookPlaceRepository.findByName(bookplace);
-        List<Student> students = studentRepository.findAll();
+    public List<StudentDTO> getAllStudents(String bookPlace){
+
+        List<Student> students;
+
+        if (Objects.nonNull(bookPlace)){
+            List<Long> bookPlaceIds = bookPlaceRepository.findByName(bookPlace);
+            students = studentRepository.findAllByBookPlace(bookPlaceIds);
+        } else {
+            students = studentRepository.findAll();
+        }
+
         return students.stream().map(student -> StudentDTO.fromEntity(student)).collect(Collectors.toList());
     }
 

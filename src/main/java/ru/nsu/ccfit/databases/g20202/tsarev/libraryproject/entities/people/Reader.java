@@ -6,8 +6,10 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.Category;
+import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.history.LendHistory;
 
 import java.sql.Date;
+import java.util.Set;
 
 @Entity //i.e. it's a table
 @Inheritance(strategy = InheritanceType.JOINED) //students and teachers extend readers; readers have common fields, students and teachers have unique
@@ -25,6 +27,9 @@ public class Reader {
     @ManyToOne
     @JoinColumn(name = "categoryId")
     protected Category categoryId;
+
+    @OneToMany(mappedBy = "reader")
+    protected Set<LendHistory> lendHistories;
 
     protected String department;
 

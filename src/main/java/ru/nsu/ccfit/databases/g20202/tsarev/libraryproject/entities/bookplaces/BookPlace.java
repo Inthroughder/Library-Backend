@@ -7,14 +7,14 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @RequiredArgsConstructor
-public class Bookplace {
+public class BookPlace {
 
     @jakarta.persistence.Id //field is an ID
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto-increment
     private Long id;
 
     @Enumerated
-    private BookplaceType type;
+    private BookPlaceType type;
 
     private String name;
 

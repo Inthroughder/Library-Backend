@@ -23,8 +23,8 @@ public class ReaderController {
     }
 
     @GetMapping("/student")
-    public List<StudentDTO> getAllStudents(@RequestParam String bookplace){
-        return readerService.getAllStudents(bookplace);
+    public List<StudentDTO> getAllStudents(@RequestParam(required = false) String bookPlace){
+        return readerService.getAllStudents(bookPlace);
     }
 
     @PostMapping("/student")
