@@ -31,9 +31,11 @@ public class Reader {
     @OneToMany(mappedBy = "reader")
     protected Set<LendHistory> lendHistories;
 
-    protected String department;
-
     protected String faculty;
+
+    protected Long ticketId;
+
+    protected Date ticketValidUntil;
 
     protected Date punishedUntil;
 

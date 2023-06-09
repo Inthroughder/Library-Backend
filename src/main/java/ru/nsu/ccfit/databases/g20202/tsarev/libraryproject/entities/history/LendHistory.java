@@ -1,6 +1,8 @@
 package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.history;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.Book;
@@ -9,8 +11,10 @@ import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.people.Reade
 import java.sql.Date;
 
 @Entity
+@Builder
 @Data
-@RequiredArgsConstructor
+@RequiredArgsConstructor //should have no-args constructor
+@AllArgsConstructor
 public class LendHistory {
 
     @jakarta.persistence.Id //field is an ID

@@ -11,6 +11,9 @@ import java.util.List;
 public interface BookPlaceRepository extends JpaRepository<BookPlace, Long> {
 
     @Query("select b.id from BookPlace b where b.name like %?1%")
-    public List<Long> findByName(String name);
+    public List<Long> findAllByName(String name);
+
+    @Query("select b.id from BookPlace b where b.name like %?1%")
+    public List<BookPlace> findAllEntitiesByName(String name);
 
 }

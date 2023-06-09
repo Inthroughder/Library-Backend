@@ -13,7 +13,8 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
 
     Student save(Student student);
 
-    @Query("select distinct s from Student s join s.lendHistories h join h.book b where b.bookPlaceId in :bookPlaceIds")
-    List<Student> findAllByBookPlace(List<Long> bookPlaceIds);
+    //TODO delete once specifications truly work
+    //@Query("select distinct s from Student s join s.lendHistories h join h.book b where b.bookPlaceId in :bookPlaceIds")
+    //List<Student> findAllByBookPlace(List<Long> bookPlaceIds);
 
 }

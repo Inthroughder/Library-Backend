@@ -5,6 +5,8 @@ public enum BookStatus {
     IN_STORAGE,
     GIVEN,
     SPOILED,
-    CLAIMED;
+    CLAIMED,
+
+    LOST;
 
 }

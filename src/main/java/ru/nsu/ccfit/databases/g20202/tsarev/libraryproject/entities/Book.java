@@ -1,6 +1,8 @@
 package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.history.LendHistory;
@@ -10,7 +12,9 @@ import java.util.Set;
 
 @Entity
 @Data
+@Builder
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Book {
 
     @jakarta.persistence.Id //field is an ID

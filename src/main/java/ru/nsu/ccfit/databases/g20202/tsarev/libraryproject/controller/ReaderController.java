@@ -2,10 +2,12 @@ package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.StudentDTO;
-import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.TeacherDTO;
+import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.LendDTO;
+import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.ReaderDTO;
+import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.history.LendHistory;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.service.ReaderService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,19 +18,74 @@ public class ReaderController {
     @Autowired
     ReaderService readerService;
 
-    @GetMapping("/student")
-    public List<StudentDTO> getAllStudents(@RequestParam(required = false) Map<String, String> params){
-        return readerService.getAllStudents(params);
+    @GetMapping
+    public List<ReaderDTO> getAllReaders(@RequestParam Map<String, String> params){
+
+        String category = params.get("category");
+        List<ReaderDTO> allReaders = new ArrayList<>();
+        if (category.isEmpty()) {
+            allReaders.addAll(readerService.getAllStudents(params));
+            allReaders.addAll(readerService.getAllTeachers(params));
+        } else {
+            switch (category){
+                case "Student":
+                    allReaders.addAll(readerService.getAllStudents(params));
+                    break;
+                case "Teacher":
+                    allReaders.addAll(readerService.getAllTeachers(params));
+                    break;
+            }
+        }
+        return allReaders;
     }
 
-    @PostMapping("/student")
-    public StudentDTO saveStudent(@RequestBody StudentDTO studentDTO){
-        return readerService.saveStudent(studentDTO);
+    @GetMapping("/debtor")
+    public List<ReaderDTO> getAllDebtors(@RequestParam Map<String, String> params){
+
+        String category = params.get("category");
+        List<ReaderDTO> allReaders = new ArrayList<>();
+        if (category.isEmpty()) {
+            allReaders.addAll(readerService.getAllStudentsDebtors(params));
+            allReaders.addAll(readerService.getAllTeachersDebtors(params));
+        } else {
+            switch (category){
+                case "Student":
+                    allReaders.addAll(readerService.getAllStudentsDebtors(params));
+                    break;
+                case "Teacher":
+                    allReaders.addAll(readerService.getAllTeachersDebtors(params));
+                    break;
+            }
+        }
+        return allReaders;
+
     }
 
-    @PostMapping("/teacher")
-    public TeacherDTO saveTeacher(@RequestBody TeacherDTO teacherDTO){
-        return readerService.saveTeacher(teacherDTO);
+    @PostMapping
+    public ReaderDTO saveReader(@RequestBody ReaderDTO readerDTO){
+
+        if (readerDTO.getCategory().equalsIgnoreCase("student")) {
+            return readerService.saveStudent(readerDTO);
+        } else if (readerDTO.getCategory().equalsIgnoreCase("teacher")) {
+            return readerService.saveTeacher(readerDTO);
+        } else {
+            throw new RuntimeException("no such category");
+        }
+
+    }
+
+    @PostMapping("/lend")
+    public LendDTO lendBook(@RequestBody LendDTO lendDTO){
+
+        return readerService.lendBook(lendDTO);
+
+    }
+
+    @DeleteMapping
+    public Long deleteReader(@RequestParam Long id){
+
+        return readerService.delete(id);
+
     }
 
 }
