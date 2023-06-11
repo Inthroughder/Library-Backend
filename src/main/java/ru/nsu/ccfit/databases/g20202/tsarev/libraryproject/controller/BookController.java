@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.BookDTO;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.LendDTO;
@@ -20,6 +21,7 @@ public class BookController {
     BookService bookService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('USER')")
     public List<BookDTO> getTopBooks(@RequestParam Map<String, String> params){
 
         return bookService.getTopBooks(params);
@@ -27,6 +29,7 @@ public class BookController {
     }
 
     @GetMapping("/lost")
+    @PreAuthorize("hasAuthority('USER')")
     public List<BookDTO> getLostBooks(@RequestParam Map<String, String> params){
 
         return bookService.getLostBooks(params);
@@ -34,6 +37,7 @@ public class BookController {
     }
 
     @GetMapping("/total")
+    @PreAuthorize("hasAuthority('USER')")
     public List<BookDTO> getTotalBooks(@RequestParam Map<String, String> params){
 
         return bookService.getTotalBooks(params);

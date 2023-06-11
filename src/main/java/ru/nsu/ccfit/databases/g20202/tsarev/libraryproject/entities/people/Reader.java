@@ -15,7 +15,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.JOINED) //students and teachers extend readers; readers have common fields, students and teachers have unique
 @SuperBuilder //required in every class in hierarchy
 @RequiredArgsConstructor //should have no-args constructor
-@AllArgsConstructor // TODO ???
+@AllArgsConstructor
 @Data //lombok thing, creates getters and setters, and also toString, hash and equals methods
 public class Reader {
     @jakarta.persistence.Id //field is an ID

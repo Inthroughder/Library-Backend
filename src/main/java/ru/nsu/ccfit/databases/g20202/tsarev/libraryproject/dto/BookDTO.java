@@ -1,20 +1,12 @@
 package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto;
 
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.Book;
-import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.BookStatus;
-import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.Category;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.Genre;
-import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.people.Student;
-import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.entities.people.Teacher;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 @Builder
 @AllArgsConstructor

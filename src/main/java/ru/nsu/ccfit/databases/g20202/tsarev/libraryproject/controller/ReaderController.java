@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.LendDTO;
 import ru.nsu.ccfit.databases.g20202.tsarev.libraryproject.dto.ReaderDTO;
@@ -19,6 +20,7 @@ public class ReaderController {
     ReaderService readerService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('USER')")
     public List<ReaderDTO> getAllReaders(@RequestParam Map<String, String> params){
 
         String category = params.get("category");
@@ -40,6 +42,7 @@ public class ReaderController {
     }
 
     @GetMapping("/debtor")
+    @PreAuthorize("hasAuthority('USER')")
     public List<ReaderDTO> getAllDebtors(@RequestParam Map<String, String> params){
 
         String category = params.get("category");
@@ -62,6 +65,7 @@ public class ReaderController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ReaderDTO saveReader(@RequestBody ReaderDTO readerDTO){
 
         if (readerDTO.getCategory().equalsIgnoreCase("student")) {
@@ -75,6 +79,7 @@ public class ReaderController {
     }
 
     @PostMapping("/lend")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public LendDTO lendBook(@RequestBody LendDTO lendDTO){
 
         return readerService.lendBook(lendDTO);
@@ -82,6 +87,7 @@ public class ReaderController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Long deleteReader(@RequestParam Long id){
 
         return readerService.delete(id);
